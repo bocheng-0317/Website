@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陳柏丞 Portfolio | CHENG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
+            background: #0f172a;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0f172a, #1e293b, #334155, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .bg-gradient::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(244, 63, 94, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+            animation: rotate 25s linear infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff 0%, #f43f5e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text .subtitle {
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-text .motto {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: #f43f5e;
+            font-style: italic;
+            padding: 20px 30px;
+            background: rgba(244, 63, 94, 0.08);
+            border-left: 5px solid #f43f5e;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(244, 63, 94, 0.1);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            inset: -25px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f43f5e, #3b82f6, #f43f5e);
+            background-size: 200% 200%;
+            animation: gradientRotate 4s linear infinite;
+            filter: blur(20px);
+            opacity: 0.7;
+        }
+
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .avatar {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: 800;
+            color: #f43f5e;
+            border: 5px solid #0f172a;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 45px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 60px rgba(244, 63, 94, 0.25);
+            border-color: rgba(244, 63, 94, 0.3);
+        }
+
+        section {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 80px;
+            background: linear-gradient(135deg, #fff 0%, #f43f5e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+
+        .info-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #f43f5e;
+            font-weight: 700;
+        }
+
+        .info-card p, .info-card ul {
+            color: #cbd5e1;
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .info-card ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #f43f5e;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .info-card ul li:hover {
+            padding-left: 35px;
+            color: #f43f5e;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #f43f5e 0%, #3b82f6 100%);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -58px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #f43f5e;
+            box-shadow: 0 0 25px rgba(244, 63, 94, 0.7);
+            border: 3px solid #0f172a;
+        }
+
+        .timeline-item h4 {
+            font-size: 1.4rem;
+            color: #f43f5e;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .timeline-item .year {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(244, 63, 94, 0.15);
+            border-radius: 25px;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            font-weight: 600;
+        }
+
+        .timeline-item p {
+            color: #cbd5e1;
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .portfolio-card {
+            position: relative;
+            height: 380px;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .portfolio-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 70px rgba(244, 63, 94, 0.3);
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.4) 0%, rgba(59, 130, 246, 0.4) 100%);
+            z-index: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-card:hover::before {
+            opacity: 0.7;
+        }
+
+        .portfolio-card .card-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            z-index: 0;
+        }
+
+        .portfolio-card .card-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 35px;
+        }
+
+        .portfolio-card h3 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .portfolio-card p {
+            color: #e2e8f0;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 45px;
+            align-items: start;
+        }
+
+        .cert-item {
+            text-align: center;
+        }
+
+        .cert-placeholder {
+            width: 100%;
+            height: 220px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed rgba(244, 63, 94, 0.4);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f43f5e;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        .cert-placeholder:hover {
+            background: rgba(244, 63, 94, 0.08);
+            border-color: #f43f5e;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(244, 63, 94, 0.2);
+        }
+
+        .cert-item h4 {
+            color: #cbd5e1;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                text-align: center;
+            }
+
+            .avatar-container {
+                width: 220px;
+                height: 220px;
+            }
+
+            .avatar {
+                font-size: 3.5rem;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                margin-bottom: 50px;
+            }
+
+            .glass-card {
+                padding: 30px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .timeline {
+                padding-left: 40px;
+            }
+
+            .timeline-item::before {
+                left: -48px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>陳柏丞</h1>
+                    <div class="subtitle">CHENG</div>
+                    <div class="motto">「只要堅持一定會成功」</div>
+                </div>
+                <div class="hero-image">
+                    <div class="avatar-container">
+                        <div class="avatar-ring"></div>
+                        <div class="avatar" style="background-image: url('data:image/jpeg;base64,PHOTO_BASE64'); background-size: cover; background-position: center; font-size: 0;">
+                            <img src="布條.jpg" alt="陳柏丞" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">關於我</h2>
+            
+            <div class="about-grid">
+                <div class="glass-card info-card">
+                    <h3>個人背景</h3>
+                    <ul>
+                        <li>就讀學校：大甲高工</li>
+                        <li>科別：資訊科</li>
+                        <li>身分：技能競賽選手</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card info-card">
+                    <h3>專業技能</h3>
+                    <ul>
+                        <li>雲端運算 (AWS)</li>
+                        <li>資訊與網路技術</li>
+                        <li>網路安全 (Cybersecurity)</li>
+                        <li>機器手臂技術 (FANUC)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <h3 style="font-size: 2rem; margin-bottom: 40px; color: #f43f5e; font-weight: 700;">競賽與經歷</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="year">一年級</span>
+                        <h4>全國技能競賽 － 中區分區賽</h4>
+                        <p>
+                            職種：雲端運算<br>
+                            取得多項 AWS 相關徽章，包含 AWS Academy Cloud Foundations 等認證
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="year">二年級</span>
+                        <h4>全國技能競賽 － 中區分區賽</h4>
+                        <p>
+                            職種：資訊與網路技術<br>
+                            考取 Cisco ITS (Information Technology Specialist Cybersecurity) 證照
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="year">三年級</span>
+                        <h4>技藝競賽 － 工業類</h4>
+                        <p>
+                            職種：機器手臂技術<br>
+                            成績：<strong style="color: #f43f5e;">金手獎 第五名</strong><br>
+                            使用機台：FANUC<br>
+                            熟悉 FANUC 機器手臂程式設計
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">作品展示</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="card-bg"></div>
+                    <div class="card-content">
+                        <h3>雲端運算專案</h3>
+                        <p>運用 AWS 服務建置高可用性雲端架構，展現雲端部署與管理能力</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="card-bg"></div>
+                    <div class="card-content">
+                        <h3>網路安全防護</h3>
+                        <p>實作網路安全防護機制，包含防火牆設定與入侵偵測系統</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="card-bg"></div>
+                    <div class="card-content">
+                        <h3>FANUC 機器手臂程式</h3>
+                        <p>開發機器手臂自動化程式，實現精密的工業自動化控制</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <h2 class="section-title">證照與徽章</h2>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="cert-placeholder" style="background-color: rgba(255, 255, 255, 0.95); padding: 20px;">
+                        <img src="AWS.jpg" alt="AWS Academy Cloud Foundations" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <h4>AWS Academy Cloud Foundations</h4>
+                </div>
+
+                <div class="cert-item">
+                    <div class="cert-placeholder" style="background-color: rgba(255, 255, 255, 0.95); padding: 20px;">
+                        <img src="ITS_pages-to-jpg-0001.jpg" alt="Cisco ITS Cybersecurity" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <h4>Cisco ITS - Information Technology Specialist Cybersecurity</h4>
+                </div>
+
+                <div class="cert-item">
+                    <div class="cert-placeholder" style="background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border: 2px solid #f43f5e;">
+                        <img src="獎盃.jpg" alt="技藝競賽金手獎" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                    </div>
+                    <h4>技藝競賽金手獎 第五名</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card, .portfolio-card, .cert-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(40px)';
+            el.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.4}px)`;
+                hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.6;
+            }
+        });
+    </script>
+</body>
+</html>
